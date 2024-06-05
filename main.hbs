@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mongosh</title>
+</head>
+<body>
+    
+    <h3> mongosh</h3>
+    {{message}}
+    <br>
+    {{#if edit_id}}
+    <h4> Edit </h4>
+   <form method="post" action="/update_book/{{edit_id}}">
+    <label for="">Title</label>
+    <input type="text" name="title" value="{{edit_book.title}}">
+    <label for="">Author</label>
+    <input type="text" name="author" value="{{edit_book.author}}">
+    <input type="submit">
+  </form> <br><br>
+
+  {{else}}
+    <h4>Create</h4>
+   <form method="post" action="/store_book">
+    <label for="">Title</label>
+    <input type="text" name="title">
+    <label for="">Author</label>
+    <input type="text" name="author">
+    <input type="submit">
+  </form> <br><br>
+{{/if}}
+
+    <ul> 
+        {{#each books}}
+        <li>{{this.title}}-{{this.author}} <a href="/?edit_id={{this._id}}">edit</a> <a href="/?delete_id={{this._id}}" onclick="return confirm('are you sure you shoud delete conform')">delete</a></li>
+        {{/each}}
+    </ul>
+    
+</body>
+</html>
